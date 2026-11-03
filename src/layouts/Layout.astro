@@ -1,0 +1,136 @@
+---
+import '../styles/fonts.css';
+import '../styles/global.css';
+import archivoFont from '../assets/fonts/archivo-latin-variable.woff2?url';
+import plexFont from '../assets/fonts/ibm-plex-sans-latin-400.woff2?url';
+import Arrow from '../components/Arrow.astro';
+import { url } from '../lib/paths';
+interface Props {
+  title?: string;
+  description?: string;
+}
+const {
+  title = 'Spaces, considered.',
+  description = 'An imagined architecture and interiors studio exploring quiet spaces, honest materials and the way we live.',
+} = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const current = Astro.url.pathname;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title} — FORMA</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={`${title} — FORMA`} />
+    <meta property="og:description" content={description} />
+    <meta
+      property="og:image"
+      content={new URL(url('social-preview.jpg'), Astro.site)}
+    />
+    <meta property="og:url" content={canonical} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="theme-color" content="#f9f9f5" />
+    <link rel="icon" type="image/svg+xml" href={url('favicon.svg')} />
+    <link
+      rel="preload"
+      href={archivoFont}
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href={plexFont}
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <meta name="generator" content={Astro.generator} />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">
+      Skip to content
+    </a>
+    <header class="site-header wrap">
+      <a class="wordmark" href={url()}>
+        FORMA<span>Interiors &amp; spaces</span>
+      </a>
+      <nav class="desktop-nav" aria-label="Main navigation">
+        <a
+          href={url('projects/')}
+          aria-current={current.includes('/projects') ? 'page' : undefined}
+        >
+          Projects
+        </a>
+        <a
+          href={url('studio/')}
+          aria-current={current.includes('/studio') ? 'page' : undefined}
+        >
+          Studio
+        </a>
+      </nav>
+      <a class="header-contact" href={url('contact/')}>
+        Start a conversation <Arrow />
+      </a>
+      <details class="mobile-nav">
+        <summary role="button" aria-label="Menu">
+          <span></span>
+          <span></span>
+        </summary>
+        <nav aria-label="Mobile navigation">
+          <a href={url('projects/')}>Projects</a>
+          <a href={url('studio/')}>Studio</a>
+          <a href={url('contact/')}>
+            Start a conversation <span aria-hidden="true">↗</span>
+          </a>
+          <p class="eyebrow">Spaces for a slower everyday.</p>
+        </nav>
+      </details>
+    </header>
+    <main id="main">
+      <slot />
+    </main>
+    <footer class="site-footer wrap">
+      <div class="footer-top">
+        <p class="eyebrow">A little space for possibility.</p>
+        <a class="footer-cta" href={url('contact/')}>
+          Let’s make room.
+          <Arrow />
+        </a>
+      </div>
+      <div class="footer-bottom">
+        <a class="footer-wordmark" href={url()}>
+          FORMA
+        </a>
+        <p>
+          Original design studies.
+          <br />
+          Imagined spaces, considered.
+        </p>
+        <nav aria-label="Footer navigation">
+          <a href={url('projects/')}>Projects</a>
+          <a href={url('studio/')}>Studio</a>
+          <a href={url('contact/')}>Contact</a>
+        </nav>
+        <p>
+          © 2026 FORMA
+          <br />A fictional portfolio studio
+        </p>
+      </div>
+    </footer>
+    <script>
+      const menu = document.querySelector<HTMLDetailsElement>('.mobile-nav');
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && menu?.open) {
+          menu.open = false;
+          menu.querySelector('summary')?.focus();
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,72 @@
+---
+import { getCollection } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Photo from '../../components/Photo.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import Arrow from '../../components/Arrow.astro';
+import { url } from '../../lib/paths';
+import ProjectGallery from '../../features/projects/ProjectGallery.astro';
+export async function getStaticPaths() {
+  return (await getCollection('projects')).map((project) => ({
+    params: { id: project.id },
+    props: { project },
+  }));
+}
+interface Props {
+  project: CollectionEntry<'projects'>;
+}
+const { project } = Astro.props;
+const p = project.data;
+const all = await getCollection('projects');
+const related = p.related
+  .map((id) => all.find((project) => project.id === id))
+  .filter((p): p is CollectionEntry<'projects'> => p !== undefined);
+---
+
+<Layout title={p.title} description={p.overview}>
+  <section class="case-intro wrap">
+    <a class="back-link" href={url('projects/')}>
+      <span aria-hidden="true">←</span> All projects
+    </a>
+    <div class="case-heading">
+      <h1>{p.title}</h1>
+      <p>{p.tagline}</p>
+    </div>
+    <div class="case-meta">
+      <span>{p.category}</span>
+      <span>{p.location}</span>
+      <span>{p.area}</span>
+      <span>Design study / {p.year}</span>
+    </div>
+  </section>
+  <div class="case-cover wrap">
+    <Photo name={p.cover} alt={p.alt} eager />
+  </div>
+  <section class="case-story wrap">
+    <p class="eyebrow">01 / The idea</p>
+    <div>
+      <h2>{p.tagline}</h2>
+      <p class="lead">{p.overview}</p>
+      <p>{p.approach}</p>
+      <dl class="material-list">
+        <dt>Material palette</dt>
+        <dd>{p.materials.join(' · ')}</dd>
+      </dl>
+    </div>
+  </section>
+  <ProjectGallery project={project} />
+  <section class="related wrap">
+    <div class="section-heading">
+      <h2>Another perspective.</h2>
+      <a class="inline-link" href={url('projects/')}>
+        All projects <Arrow />
+      </a>
+    </div>
+    <div class="projects-grid">
+      {related.map((project) => (
+        <ProjectCard project={project} />
+      ))}
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,35 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ContactForm from '../features/contact/ContactForm.astro';
+---
+
+<Layout
+  title="Start a conversation"
+  description="Try the local demonstration enquiry form for the fictional FORMA interiors studio. Nothing is sent or stored."
+>
+  <section class="contact-layout wrap">
+    <div class="contact-intro">
+      <p class="eyebrow">Every space starts somewhere.</p>
+      <h1>
+        Let’s make
+        <br />
+        room.
+      </h1>
+      <p>
+        A new home. A place to gather.
+        <br />
+        An idea that’s still taking shape.
+      </p>
+      <p>Tell us what you have in mind.</p>
+      <div class="contact-note">
+        <span class="note-dot"></span>
+        <p>
+          This is a demonstration form.
+          <br />
+          Nothing is sent or stored. Use sample details.
+        </p>
+      </div>
+    </div>
+    <ContactForm />
+  </section>
+</Layout>

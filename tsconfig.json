@@ -1,1 +1,5 @@
-{"extends":"astro/tsconfigs/strictest","include":[".astro/types.d.ts","**/*"],"exclude":["dist","node_modules",".tools"]}
+{
+  "extends": "astro/tsconfigs/strictest",
+  "include": [".astro/types.d.ts", "**/*"],
+  "exclude": ["dist", "node_modules", ".tools"]
+}

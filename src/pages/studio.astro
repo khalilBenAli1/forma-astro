@@ -1,0 +1,78 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Photo from '../components/Photo.astro';
+import Arrow from '../components/Arrow.astro';
+import { url } from '../lib/paths';
+---
+
+<Layout
+  title="The studio"
+  description="A fictional independent interiors studio exploring thoughtful spaces through light, material and everyday rituals."
+>
+  <section class="page-intro wrap">
+    <p class="eyebrow">The studio / A way of seeing</p>
+    <h1>
+      Less noise.
+      <br />
+      More feeling.
+    </h1>
+    <p>Spaces that make room for life.</p>
+  </section>
+  <div class="studio-photo wrap">
+    <Photo
+      name="clay-atelier"
+      alt="Pale timber and limewashed brick in the fictional Clay Atelier ceramics studio"
+      eager
+    />
+  </div>
+  <section class="studio-intro wrap">
+    <p class="eyebrow">Our point of view</p>
+    <div>
+      <h2>
+        Thoughtful by nature.
+        <br />
+        Human by design.
+      </h2>
+      <p>
+        We believe the most meaningful rooms are the ones that feel easy to
+        inhabit. Spaces with enough structure to hold a life, and enough
+        openness to let it change.
+      </p>
+      <p>
+        FORMA is an imagined independent studio working at the meeting point of
+        interiors and architecture. These four design studies explore a simple
+        question: what happens when we give familiar places a little more
+        attention?
+      </p>
+      <a class="inline-link" href={url('projects/')}>
+        Explore the studies <Arrow />
+      </a>
+    </div>
+  </section>
+  <section class="principles wrap">
+    <p class="eyebrow">How we think</p>
+    {[
+      {
+        n: '01',
+        title: 'Begin with listening.',
+        copy: 'Every good brief starts with the rhythms of a day. We look for the small practical details before drawing the big gesture.',
+      },
+      {
+        n: '02',
+        title: 'Let materials speak.',
+        copy: 'Natural surfaces, useful details and a restrained palette. Materials chosen for how they feel today and how they might age tomorrow.',
+      },
+      {
+        n: '03',
+        title: 'Leave room for life.',
+        copy: 'A room is never finished by its architecture. We imagine spaces that can be adapted, shared and made personal over time.',
+      },
+    ].map((p) => (
+      <article>
+        <span>{p.n}</span>
+        <h2>{p.title}</h2>
+        <p>{p.copy}</p>
+      </article>
+    ))}
+  </section>
+</Layout>

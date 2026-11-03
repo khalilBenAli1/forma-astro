@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://khalilbenali1.github.io/forma-astro/sitemap-index.xml

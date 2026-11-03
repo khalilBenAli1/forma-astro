@@ -1,0 +1,20 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import ProjectCollection from '../../features/projects/ProjectCollection.astro';
+const projects = (await getCollection('projects')).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+---
+
+<Layout
+  title="Selected projects"
+  description="Four original fictional design studies, exploring residential, hospitality, workplace and cultural spaces."
+>
+  <section class="page-intro wrap">
+    <p class="eyebrow">A collection of possibilities / 2026</p>
+    <h1>Selected spaces.</h1>
+    <p>Different places. A shared way of seeing.</p>
+  </section>
+  <ProjectCollection projects={projects} />
+</Layout>

@@ -1,0 +1,20 @@
+{
+  "title": "Clay Atelier",
+  "tagline": "Room for making.",
+  "category": "Workplace",
+  "location": "Copenhagen, Denmark",
+  "year": 2026,
+  "area": "190 m²",
+  "cover": "clay-atelier",
+  "alt": "Light-filled ceramics workshop with pale timber beams, a long oak making table and handmade vessels",
+  "overview": "An imagined ceramics studio where making and displaying share the same generous room. North light, useful surfaces and an honest material palette form a calm backdrop to the mess and repetition of craft.",
+  "approach": "The work table sits at the centre of the plan. Open shelving gives unfinished pieces space to rest, and a low courtyard threshold offers a place to pause. Pale timber and limewashed brick are chosen to age alongside daily use, without demanding perfection.",
+  "materials": ["Limewashed brick", "Oak", "Raw stone", "Clay"],
+  "gallery": [
+    { "label": "The shared making room", "position": "50% 50%" },
+    { "label": "Oak work table and vessels", "position": "50% 70%" },
+    { "label": "Timber structure and north light", "position": "60% 20%" }
+  ],
+  "related": ["listening-room", "tidal-pavilion"],
+  "order": 3
+}
