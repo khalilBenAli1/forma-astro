@@ -16,7 +16,7 @@ The build generates nine HTML pages. No hydrated UI framework, client router or 
 | Homepage, studio or 404 script budget           |                161 |              147 |
 | Project route scripts, including shared handler |              1,463 |              730 |
 | Contact route scripts, including shared handler |              1,861 |              992 |
-| Shared CSS                                      |             17,774 |            4,240 |
+| Shared CSS                                      |             18,232 |            4,390 |
 
 Scripts are separate route-specific modules. The home page does not load the gallery, filters or enquiry behavior. The form validator is plain TypeScript and ships without Zod; Zod validates collection content at build time.
 
@@ -31,6 +31,6 @@ Four images have three responsive WebP candidates each, totalling **1,423,930 by
 | Clay Atelier    | 47,116 B | 104,062 B | 205,596 B |
 | Tidal Pavilion  | 29,944 B |  80,872 B | 185,398 B |
 
-The Courtyard cover is 1600×900; the other images are 1600×1067. Correct intrinsic dimensions reserve space. Grid images declare half-page desktop sizes, while covers declare full content width. The first major photograph is eager/high-priority; other photographs are lazy. Gallery crops reuse their study's image URL rather than downloading invented additional angles. The system font stack downloads **zero font bytes**.
+The Courtyard cover is 1600×900; the other images are 1600×1067. Correct intrinsic dimensions reserve space. Grid images declare half-page desktop sizes, while covers declare full content width. The first major photograph is eager/high-priority; other photographs are lazy. Gallery crops reuse their study's image URL rather than downloading invented additional angles. The self-hosted Archivo variable Latin font is **34,928 bytes**, and IBM Plex Sans Latin regular is **22,588 bytes**, totalling **57,516 font bytes**. Both are preloaded WOFF2 files with display swap; no external font service is contacted.
 
 The largest delivered photograph is about 237 KiB. This is a deliberate quality tradeoff for an image-led architecture portfolio. The app has been visually inspected at 390px and 1440px, and all routes pass overflow checks at 320/390/768/1440. No real-device performance score or screen-reader certification is claimed.

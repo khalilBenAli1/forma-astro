@@ -141,6 +141,7 @@ test('every route loads without broken assets, reflows and passes an axe scan', 
   });
   for (const path of paths) {
     await page.goto(path);
+    await page.evaluate(() => document.fonts.ready);
     await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
     for (const width of [320, 390, 768, 1440]) {
       await page.setViewportSize({ width, height: 960 });
@@ -195,6 +196,14 @@ test('approved editorial layout keeps its desktop and mobile hierarchy', async (
 }) => {
   await page.setViewportSize({ width: 1440, height: 960 });
   await page.goto('');
+  await page.evaluate(() => document.fonts.ready);
+  expect(
+    await page.evaluate(() =>
+      [...document.fonts]
+        .filter((font) => font.status === 'loaded')
+        .map((font) => font.family),
+    ),
+  ).toEqual(expect.arrayContaining(['Archivo', 'IBM Plex Sans']));
   const heading = page.getByRole('heading', { level: 1 });
   const hero = page.locator('.featured-image');
   const desktopHeading = await heading.boundingBox();

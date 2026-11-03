@@ -14,7 +14,7 @@ All four architecture images depict fictional design studies. They are not docum
 
 The built-in ImageGen tool was used; no API key, paid third-party workflow, or hotlinked image is required. Selected output files were copied into this repository as optimized WebP derivatives at 640, 1000 and 1600 pixels wide. Detail gallery frames are explicitly described as crops of one image, never additional views of a completed project. Shared studio and project-index imagery links to its originating study.
 
-The typography uses the visitor's installed Arial/Helvetica/sans-serif system stack. There are no downloaded font files, external font services or bundled font licenses. The original code MIT license does not claim to relicense third-party assets or dependencies.
+Typography is self-hosted: Archivo for display and IBM Plex Sans for body/interface text. The Latin variable Archivo WOFF2 comes from `@fontsource-variable/archivo@5.3.0`; the IBM Plex Sans Latin regular WOFF2 comes from `@fontsource/ibm-plex-sans@5.3.0`. Both use SIL OFL 1.1, with full notices in [Archivo-OFL.txt](docs/licenses/Archivo-OFL.txt) and [IBM-Plex-Sans-OFL.txt](docs/licenses/IBM-Plex-Sans-OFL.txt). Upstream authors: [Omnibus-Type/Archivo](https://github.com/Omnibus-Type/Archivo) and [IBM/plex](https://github.com/IBM/plex). Only the required two WOFF2 files are bundled; there are no runtime font-service requests. The original code MIT license does not relicense fonts or dependencies.
 
 ## Generation prompts
 

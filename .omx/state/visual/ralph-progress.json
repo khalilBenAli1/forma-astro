@@ -4,10 +4,21 @@
   "threshold_pass": true,
   "verdict": "pass",
   "category_match": true,
-  "reference_images": ["/Users/khalilbenali/work/output/frontend-portfolio-prompts/references/forma-interiors-desktop.png", "/Users/khalilbenali/work/output/frontend-portfolio-prompts/references/forma-interiors-mobile.png"],
-  "generated_screenshots": ["docs/screenshots/home-desktop.png", "docs/screenshots/home-mobile.png"],
-  "differences": ["Desktop omits the unrequested Journal navigation and uses two primary section links.", "Mobile headline tracking is slightly tighter, while preserving the two-line composition."],
+  "reference_images": [
+    "/Users/khalilbenali/work/output/frontend-portfolio-prompts/references/forma-interiors-desktop.png",
+    "/Users/khalilbenali/work/output/frontend-portfolio-prompts/references/forma-interiors-mobile.png"
+  ],
+  "generated_screenshots": [
+    "docs/screenshots/home-desktop.png",
+    "docs/screenshots/home-mobile.png"
+  ],
+  "differences": [
+    "Per the newer user typography override, self-hosted Archivo and IBM Plex Sans replace the system sans-serif while preserving the approved hierarchy.",
+    "The unrequested Journal link remains omitted."
+  ],
   "suggestions": [],
-  "next_actions": ["Complete production interaction and accessibility checks; preserve the approved composition."],
-  "reasoning": "The implemented homepage closely preserves the reference hierarchy, whitespace, warm full-width architecture image, two-line mobile heading, project caption and restrained arrow treatment. Both actual production captures are clear and unclipped."
+  "next_actions": [
+    "Run typography-loaded layout, accessibility and interaction regressions, then publish after passing CI."
+  ],
+  "reasoning": "The requested unique type pairing retains the reference whitespace, oversized charcoal heading, warm full-width architecture photograph and clear mobile caption. Fresh production captures are unclipped and preserve the approved two-line mobile heading."
 }

@@ -1,5 +1,8 @@
 ---
+import '../styles/fonts.css';
 import '../styles/global.css';
+import archivoFont from '../assets/fonts/archivo-latin-variable.woff2?url';
+import plexFont from '../assets/fonts/ibm-plex-sans-latin-400.woff2?url';
 import Arrow from '../components/Arrow.astro';
 import { url } from '../lib/paths';
 interface Props {
@@ -33,6 +36,20 @@ const current = Astro.url.pathname;
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="theme-color" content="#f9f9f5" />
     <link rel="icon" type="image/svg+xml" href={url('favicon.svg')} />
+    <link
+      rel="preload"
+      href={archivoFont}
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href={plexFont}
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
     <meta name="generator" content={Astro.generator} />
   </head>
   <body>

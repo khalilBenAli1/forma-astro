@@ -24,6 +24,9 @@ const scripts = await Promise.all(
 const css = await Promise.all(
   files.filter((path) => path.endsWith('.css')).map(size),
 );
+const fonts = await Promise.all(
+  files.filter((path) => path.endsWith('.woff2')).map(size),
+);
 const images = await Promise.all(
   files.filter((path) => path.endsWith('.webp')).map(size),
 );
@@ -34,6 +37,8 @@ console.log(
       scripts,
       css,
       images,
+      fonts,
+      totalFontBytes: fonts.reduce((sum, font) => sum + font.bytes, 0),
       totalImageBytes: images.reduce((sum, image) => sum + image.bytes, 0),
     },
     null,

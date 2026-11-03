@@ -58,6 +58,6 @@ GitHub Actions uses immutable official action SHAs and minimal permissions. GitH
 
 ## Scope and licenses
 
-Original code uses [MIT](LICENSE); dependencies retain their own licenses. [ASSETS.md](ASSETS.md) documents generated imagery, provenance and prompts. Typography uses the local system sans-serif stack and downloads no fonts. AI artwork is conceptual and may contain architectural imperfections.
+Original code uses [MIT](LICENSE); dependencies retain their own licenses. [ASSETS.md](ASSETS.md) documents generated imagery, provenance and prompts. Typography pairs self-hosted Archivo display type with IBM Plex Sans interface text; their SIL OFL licenses are included. AI artwork is conceptual and may contain architectural imperfections.
 
 The WCAG 2.2 AA target is supported by automated Axe and keyboard checks, without claiming certification. Physical mobile hardware and screen-reader testing remain outside the verified scope. The enquiry form intentionally has no delivery backend.

@@ -1,5 +1,5 @@
 :root {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'IBM Plex Sans', Arial, sans-serif;
   color: #222421;
   background: #fafaf7;
   font-synthesis: none;
@@ -71,6 +71,7 @@ p {
 h1,
 h2,
 h3 {
+  font-family: 'Archivo', Arial, sans-serif;
   font-weight: 600;
 }
 h1 {
@@ -1343,4 +1344,10 @@ p {
   .home-intro h1 {
     font-size: clamp(48px, 14.87vw, 58px);
   }
+}
+
+.wordmark,
+.footer-wordmark,
+.footer-cta {
+  font-family: 'Archivo', Arial, sans-serif;
 }
