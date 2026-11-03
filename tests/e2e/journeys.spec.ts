@@ -145,11 +145,14 @@ test('every route loads without broken assets, reflows and passes an axe scan', 
     await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
     for (const width of [320, 390, 768, 1440]) {
       await page.setViewportSize({ width, height: 960 });
+      const dimensions = await page.evaluate(() => ({
+        scrollWidth: document.documentElement.scrollWidth,
+        clientWidth: document.documentElement.clientWidth,
+      }));
       expect(
-        await page.evaluate(
-          () => document.documentElement.scrollWidth <= window.innerWidth,
-        ),
-      ).toBe(true);
+        dimensions.scrollWidth,
+        `${path || 'home'} at ${width}px`,
+      ).toBeLessThanOrEqual(dimensions.clientWidth);
     }
     const results = await new AxeBuilder({ page }).analyze();
     expect(results.violations).toEqual([]);
@@ -228,4 +231,41 @@ test('approved editorial layout keeps its desktop and mobile hierarchy', async (
   await expect(
     page.locator('.featured-caption').getByRole('heading'),
   ).toBeVisible();
+});
+
+test('maximum-length contact details reflow in the local preview on narrow screens', async ({
+  page,
+}) => {
+  for (const width of [320, 390, 768]) {
+    await page.setViewportSize({ width, height: 960 });
+    await page.goto('contact/');
+    await page.evaluate(() => document.fonts.ready);
+    await page.getByLabel('Your name').fill('Alexandria'.repeat(10));
+    await page
+      .getByLabel('Email address')
+      .fill(`${'a'.repeat(60)}@example.com`);
+    await page.getByLabel('What kind of space?').selectOption('Residential');
+    await page
+      .getByLabel('A little about your idea')
+      .fill(
+        'A calm room with plenty of natural light. '.repeat(60).slice(0, 2000),
+      );
+    await page.getByRole('button', { name: 'Preview enquiry' }).click();
+    await expect(
+      page.getByRole('heading', { name: 'Your idea has room to grow.' }),
+    ).toBeVisible();
+    const dimensions = await page.evaluate(() => ({
+      scrollWidth: document.documentElement.scrollWidth,
+      clientWidth: document.documentElement.clientWidth,
+    }));
+    expect(
+      dimensions.scrollWidth,
+      `long enquiry preview at ${width}px`,
+    ).toBeLessThanOrEqual(dimensions.clientWidth);
+    const reset = page.getByRole('button', { name: 'Try another enquiry' });
+    await reset.scrollIntoViewIfNeeded();
+    await expect(reset).toBeInViewport();
+    await reset.click();
+    await expect(page.getByLabel('Your name')).toHaveValue('');
+  }
 });

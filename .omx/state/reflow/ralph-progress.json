@@ -1,0 +1,23 @@
+{
+  "score": 94,
+  "threshold": 90,
+  "threshold_pass": true,
+  "verdict": "pass",
+  "category_match": true,
+  "differences": [
+    "Accepted unbroken names wrap inside the result paragraph without changing the default page composition."
+  ],
+  "suggestions": [],
+  "reasoning": "The actual 320px capture retains the editorial result layout and all name text fits within the viewport. Both browser engines pass strict clientWidth reflow assertions and the maximum-length input/reset journey.",
+  "next_actions": [],
+  "generated_screenshot": "docs/screenshots/contact-long-name.png",
+  "completed_at": "2026-11-03T02:47:42.369009+00:00",
+  "observed_before": {
+    "scrollWidth": 842,
+    "clientWidth": 320
+  },
+  "observed_after": {
+    "scrollWidth": 320,
+    "clientWidth": 320
+  }
+}

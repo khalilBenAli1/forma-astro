@@ -25,7 +25,7 @@ Node 22.23.4 satisfies Astro 7.4.5's current engine requirement. npm 10.9.8 is p
 
 ## Verification and limits
 
-Tests cover the actual content schema and related routes, pure form validation, URL state/back/reload/empty results, all prerendered routes, gallery arrows/Tab/Escape/focus restoration, mobile menu, contact success/retry and absence of submission requests. Chromium and WebKit also check static no-JavaScript navigation, disabled no-JavaScript form submission, layout geometry, Axe scans and reflow at 320/390/768/1440.
+Tests cover the actual content schema and related routes, pure form validation, URL state/back/reload/empty results, all prerendered routes, gallery arrows/Tab/Escape/focus restoration, mobile menu, contact success/retry and absence of submission requests. Chromium and WebKit also check static no-JavaScript navigation, disabled no-JavaScript form submission, layout geometry, Axe scans and reflow at 320/390/768/1440. Overflow is measured against `document.documentElement.clientWidth`; `innerWidth` can expand with mobile overflow and is not used as the assertion boundary. A maximum-length accepted contact name also exercises wrapping and reset at 320/390/768.
 
 Automated scans support the WCAG 2.2 AA target; they are not a certification. Physical screen-reader/mobile-hardware testing and a real enquiry backend are outside this demo. AI imagery may contain architectural imperfections and is presented only as conceptual artwork.
 

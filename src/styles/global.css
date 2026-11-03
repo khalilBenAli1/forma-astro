@@ -1355,3 +1355,7 @@ p {
 .lightbox button:focus-visible {
   outline-color: #fafaf7;
 }
+
+#success-message {
+  overflow-wrap: anywhere;
+}

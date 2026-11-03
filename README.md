@@ -46,7 +46,7 @@ npm run test:e2e
 node scripts/measure-build.mjs
 ```
 
-The unit tests exercise the real content schema, related IDs, distinct cover imagery, invalid content rejection and enquiry validation boundaries. The **14 Playwright journeys** run in Chromium and WebKit, including filtering/back/reload, gallery keyboard/focus behavior, mobile navigation, contact validation/success/reset, static no-JavaScript navigation, approved layout geometry, and every route's accessibility/reflow at **320, 390, 768 and 1440px**. CI installs browser dependencies, repeats the frozen-lockfile checks and deploys main only after success.
+The unit tests exercise the real content schema, related IDs, distinct cover imagery, invalid content rejection and enquiry validation boundaries. The **16 Playwright journeys** run in Chromium and WebKit, including filtering/back/reload, gallery keyboard/focus behavior, mobile navigation, contact validation/success/reset, static no-JavaScript navigation, approved layout geometry, and maximum-length contact input, and every route's accessibility/reflow against `documentElement.clientWidth` at **320, 390, 768 and 1440px**. CI installs browser dependencies, repeats the frozen-lockfile checks and deploys main only after success.
 
 Actual screenshot evidence: [short interaction walkthrough](docs/screenshots/forma-walkthrough.webm), [desktop home](docs/screenshots/home-desktop.png), [mobile home](docs/screenshots/home-mobile.png), [project index](docs/screenshots/projects-desktop.png), [case study](docs/screenshots/project-desktop.png), [contact](docs/screenshots/contact-desktop.png). The reference comparison scored 94/100; this is an internal visual review, not a performance or accessibility certification.
 

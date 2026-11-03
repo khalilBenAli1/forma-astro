@@ -31,3 +31,9 @@ The reference review scored 94/100 after the requested font update. This is an i
 No external deployment blockers remain. Physical mobile hardware and screen-reader verification were not performed. Imagery is conceptual AI artwork, and the contact form intentionally previews locally without delivery or persistence.
 
 The final keyboard visual pass strengthened the gallery focus outline to warm white on charcoal. Both gallery keyboard/focus journeys passed again in Chromium and WebKit.
+
+## Follow-up reflow correction
+
+The overflow assertion now compares document scroll width with `document.documentElement.clientWidth`. The nine original routes pass at 320/390/768/1440 in both engines. A new maximum-length accepted contact-input journey exposed an unbroken 100-character name expanding the success result to 842px at a 320px viewport. One scoped `overflow-wrap: anywhere` rule fixes that edge case without changing the default composition. The corrected result measures 320px scroll width against 320px client width; reset remains usable.
+
+The current suite contains sixteen Chromium/WebKit journeys, including this long-input regression at 320/390/768. All sixteen passed locally with lint, formatting, strict analysis, six unit tests and production build. [Actual corrected narrow-screen state](screenshots/contact-long-name.png).
