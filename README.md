@@ -1,9 +1,63 @@
 # FORMA — Spaces, considered.
 
-An original fictional architecture and interiors portfolio created in November 2026. Built with Astro, strict TypeScript, validated content collections and plain CSS. The design studies are imagined spaces, not built client commissions. No real message is sent by the demo contact form.
+An original fictional architecture and interiors portfolio created in **November 2026**. Four imagined spaces explore light, material and everyday rituals through a spacious editorial interface.
 
-Implementation is underway. The delivery plan is in [docs/IMPLEMENTATION_PLAN.md](docs/IMPLEMENTATION_PLAN.md). Public demonstration and verification evidence will be recorded after deployment.
+![FORMA production homepage](docs/screenshots/home-desktop.png)
 
-## Development
+[Source](https://github.com/khalilBenAli1/forma-astro) · [Quality checks](https://github.com/khalilBenAli1/forma-astro/actions) · [Architecture](docs/ARCHITECTURE.md) · [Asset provenance](ASSETS.md)
 
-Node 22.23.4 and npm 10.9.8. Run `npm ci`, then `npm run dev`. GitHub Pages is the intended free static host at the `/forma-astro/` base path.
+Publication is being verified. The free GitHub Pages target is `https://khalilbenali1.github.io/forma-astro/`.
+
+## Explore
+
+- A photographic homepage, studio page and four complete project narratives.
+- Residential, hospitality, workplace and cultural collection filters with URL state, Back/reload support and empty-result recovery.
+- Prerendered case studies, meaningful related links and responsive original concept imagery.
+- A keyboard gallery with arrow navigation, wrapping, consistent Tab containment, Escape and restored focus. Full-image links work without JavaScript.
+- Native mobile navigation and reduced-motion support.
+- A validated **local enquiry preview**. It sends and stores nothing; use sample details. “Try another enquiry” resets it. Without JavaScript the submission control stays disabled.
+- Page-specific metadata, canonical URLs, sitemap, social preview and a deliberate 404.
+
+**These are fictional design studies, not built client commissions.** There are no fabricated testimonials, awards, commercial metrics, external enquiries or real customer records. Each study has one original image; gallery details are explicitly labelled crops of that same image.
+
+## Run locally
+
+Use Node **22.23.4** and npm **10.9.8**. Astro 7.4.5 requires this Node patch or newer. Dependencies and the package manager are pinned; no API keys or accounts are needed to try the application.
+
+```sh
+nvm use
+npm install --global npm@10.9.8
+npm ci
+npm run dev
+```
+
+Open `http://127.0.0.1:4184/forma-astro/`. To inspect production output, run `npm run build` then `npm run preview`.
+
+## Verify
+
+```sh
+npm run lint
+npm run format:check
+npm run typecheck
+npm test
+npm run build
+npx playwright install chromium webkit
+npm run test:e2e
+node scripts/measure-build.mjs
+```
+
+The unit tests exercise the real content schema, related IDs, distinct cover imagery, invalid content rejection and enquiry validation boundaries. The **14 Playwright journeys** run in Chromium and WebKit, including filtering/back/reload, gallery keyboard/focus behavior, mobile navigation, contact validation/success/reset, static no-JavaScript navigation, approved layout geometry, and every route's accessibility/reflow at **320, 390, 768 and 1440px**. CI installs browser dependencies, repeats the frozen-lockfile checks and deploys main only after success.
+
+Actual screenshot evidence: [desktop home](docs/screenshots/home-desktop.png), [mobile home](docs/screenshots/home-mobile.png), [project index](docs/screenshots/projects-desktop.png), [case study](docs/screenshots/project-desktop.png), [contact](docs/screenshots/contact-desktop.png). The reference comparison scored 94/100; this is an internal visual review, not a performance or accessibility certification.
+
+## Implementation
+
+**Astro 7.4.5 · strict TypeScript 6.0.3 · content collections · Zod · plain CSS**. No React/Vue runtime, client router, global store, backend, database, analytics or third-party form service. Pages compose focused collection, gallery and enquiry features; the validator is pure TypeScript. Temporary UI state stays local, and contact data is never persisted. See [architecture and data flow](docs/ARCHITECTURE.md) and [measured payloads](docs/PERFORMANCE.md).
+
+GitHub Actions uses immutable official action SHAs and minimal permissions. GitHub Pages receives static directory routes under `/forma-astro/`. The explicit npm pin and AJV development peer pin keep clean installation deterministic; the minimatch override applies its current advisory fix.
+
+## Scope and licenses
+
+Original code uses [MIT](LICENSE); dependencies retain their own licenses. [ASSETS.md](ASSETS.md) documents generated imagery, provenance and prompts. Typography uses the local system sans-serif stack and downloads no fonts. AI artwork is conceptual and may contain architectural imperfections.
+
+The WCAG 2.2 AA target is supported by automated Axe and keyboard checks, without claiming certification. Physical mobile hardware and screen-reader testing remain outside the verified scope. The enquiry form intentionally has no delivery backend.

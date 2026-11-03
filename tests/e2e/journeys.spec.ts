@@ -189,3 +189,34 @@ test('static navigation, all studies and image links remain useful without JavaS
   ).toBeDisabled();
   await context.close();
 });
+
+test('approved editorial layout keeps its desktop and mobile hierarchy', async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 1440, height: 960 });
+  await page.goto('');
+  const heading = page.getByRole('heading', { level: 1 });
+  const hero = page.locator('.featured-image');
+  const desktopHeading = await heading.boundingBox();
+  const desktopHero = await hero.boundingBox();
+  expect(desktopHeading).not.toBeNull();
+  expect(desktopHero).not.toBeNull();
+  expect(desktopHeading!.height).toBeLessThan(130);
+  expect(desktopHero!.x).toBeCloseTo(60, 0);
+  expect(desktopHero!.width).toBeCloseTo(1320, 0);
+  expect(desktopHero!.y).toBeGreaterThan(
+    desktopHeading!.y + desktopHeading!.height,
+  );
+  await page.setViewportSize({ width: 390, height: 844 });
+  const mobileHeading = await heading.boundingBox();
+  const mobileHero = await hero.boundingBox();
+  expect(mobileHeading).not.toBeNull();
+  expect(mobileHero).not.toBeNull();
+  expect(mobileHeading!.height).toBeGreaterThan(100);
+  expect(mobileHero!.x).toBe(0);
+  expect(mobileHero!.width).toBe(390);
+  expect(mobileHero!.height).toBeGreaterThan(340);
+  await expect(
+    page.locator('.featured-caption').getByRole('heading'),
+  ).toBeVisible();
+});

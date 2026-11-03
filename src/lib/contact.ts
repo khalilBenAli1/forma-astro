@@ -1,3 +1,10 @@
+export const contactInterests = [
+  'Residential',
+  'Hospitality',
+  'Workplace',
+  'Cultural',
+  'Something else',
+] as const;
 export interface ContactValues {
   name: string;
   email: string;
@@ -14,15 +21,7 @@ export function validateContact(values: ContactValues): ContactErrors {
     values.email.length > 254
   )
     errors.email = 'Enter a valid email address.';
-  if (
-    ![
-      'Residential',
-      'Hospitality',
-      'Workplace',
-      'Cultural',
-      'Something else',
-    ].includes(values.interest)
-  )
+  if (!contactInterests.some((interest) => interest === values.interest))
     errors.interest = 'Choose the type of space you have in mind.';
   if (values.message.trim().length < 20 || values.message.trim().length > 2000)
     errors.message = 'Tell us a little more, between 20 and 2,000 characters.';

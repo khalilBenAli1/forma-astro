@@ -15,7 +15,11 @@ const { project } = Astro.props;
     class="project-image"
     aria-label={`Explore ${project.data.title}`}
   >
-    <Photo name={project.data.cover} alt={project.data.alt} />
+    <Photo
+      name={project.data.cover}
+      alt={project.data.alt}
+      sizes="(max-width: 700px) 100vw, 46vw"
+    />
     <span class="image-corner" aria-hidden="true">
       <Arrow />
     </span>
