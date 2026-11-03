@@ -1,0 +1,201 @@
+---
+import { getCollection } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Photo from '../../components/Photo.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import Arrow from '../../components/Arrow.astro';
+import { url, imageUrl } from '../../lib/paths';
+export async function getStaticPaths() {
+  return (await getCollection('projects')).map((project) => ({
+    params: { id: project.id },
+    props: { project },
+  }));
+}
+interface Props {
+  project: CollectionEntry<'projects'>;
+}
+const { project } = Astro.props;
+const p = project.data;
+const all = await getCollection('projects');
+const related = p.related
+  .map((id) => all.find((project) => project.id === id))
+  .filter((p): p is CollectionEntry<'projects'> => p !== undefined);
+---
+
+<Layout title={p.title} description={p.overview}>
+  <section class="case-intro wrap">
+    <a class="back-link" href={url('projects/')}>
+      <span aria-hidden="true">←</span> All projects
+    </a>
+    <div class="case-heading">
+      <h1>{p.title}</h1>
+      <p>{p.tagline}</p>
+    </div>
+    <div class="case-meta">
+      <span>{p.category}</span>
+      <span>{p.location}</span>
+      <span>{p.area}</span>
+      <span>Design study / {p.year}</span>
+    </div>
+  </section>
+  <div class="case-cover wrap">
+    <Photo name={p.cover} alt={p.alt} eager />
+  </div>
+  <section class="case-story wrap">
+    <p class="eyebrow">01 / The idea</p>
+    <div>
+      <h2>{p.tagline}</h2>
+      <p class="lead">{p.overview}</p>
+      <p>{p.approach}</p>
+      <dl class="material-list">
+        <dt>Material palette</dt>
+        <dd>{p.materials.join(' · ')}</dd>
+      </dl>
+    </div>
+  </section>
+  <section class="gallery wrap" aria-labelledby="gallery-heading">
+    <div class="section-heading">
+      <h2 id="gallery-heading">A closer look.</h2>
+      <p>
+        Explore the image <span aria-hidden="true">↗</span>
+      </p>
+    </div>
+    <div class="gallery-grid">
+      {p.gallery.map((frame, index) => (
+        <figure>
+          <a
+            class="gallery-open"
+            href={imageUrl(p.cover)}
+            data-gallery-index={index}
+            data-position={frame.position}
+            data-caption={frame.label}
+            aria-label={`Enlarge image ${index + 1}: ${frame.label}`}
+          >
+            <Photo
+              name={p.cover}
+              alt={`${frame.label}. ${p.alt}`}
+              position={frame.position}
+            />
+            <span class="gallery-enlarge">
+              <Arrow />
+            </span>
+          </a>
+          <figcaption>
+            <span>0{index + 1}</span>
+            {frame.label}
+          </figcaption>
+        </figure>
+      ))}
+    </div>
+    <p class="demo-note">
+      One original concept image, with detail crops of the same space.
+      AI-generated architectural imagery.
+    </p>
+  </section>
+  <dialog class="lightbox" aria-labelledby="lightbox-caption">
+    <div class="lightbox-toolbar">
+      <span>FORMA / {p.title}</span>
+      <button type="button" data-close aria-label="Close image gallery">
+        Close <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="lightbox-stage">
+      <img src={imageUrl(p.cover)} width="1600" height="1067" alt={p.alt} />
+    </div>
+    <div class="lightbox-footer">
+      <p id="lightbox-caption"></p>
+      <div>
+        <button type="button" data-previous aria-label="Previous image">
+          ←
+        </button>
+        <span data-count aria-live="polite"></span>
+        <button type="button" data-next aria-label="Next image">
+          →
+        </button>
+      </div>
+    </div>
+  </dialog>
+  <section class="related wrap">
+    <div class="section-heading">
+      <h2>Another perspective.</h2>
+      <a class="inline-link" href={url('projects/')}>
+        All projects <Arrow />
+      </a>
+    </div>
+    <div class="projects-grid">
+      {related.map((project) => (
+        <ProjectCard project={project} />
+      ))}
+    </div>
+  </section>
+  <script>
+    const dialog = document.querySelector<HTMLDialogElement>('.lightbox');
+    const links = [
+      ...document.querySelectorAll<HTMLAnchorElement>('.gallery-open'),
+    ];
+    let active = 0;
+    let opener: HTMLAnchorElement | undefined;
+    const render = () => {
+      const current = links[active];
+      const img = dialog?.querySelector('img');
+      if (!current || !img || !dialog) return;
+      img.style.objectPosition = current.dataset.position ?? 'center';
+      img.style.objectFit = active === 0 ? 'contain' : 'cover';
+      img.style.transform = active === 0 ? 'none' : 'scale(1.65)';
+      img.style.transformOrigin = current.dataset.position ?? 'center';
+      img.alt = current.querySelector('img')?.alt ?? '';
+      const caption = dialog.querySelector('#lightbox-caption');
+      if (caption) caption.textContent = current.dataset.caption ?? '';
+      const count = dialog.querySelector('[data-count]');
+      if (count) count.textContent = `${active + 1} / ${links.length}`;
+    };
+    const move = (delta: number) => {
+      active = (active + delta + links.length) % links.length;
+      render();
+    };
+    links.forEach((link, index) =>
+      link.addEventListener('click', (event) => {
+        if (!dialog) return;
+        event.preventDefault();
+        active = index;
+        opener = link;
+        render();
+        dialog.showModal();
+        dialog.querySelector<HTMLButtonElement>('[data-close]')?.focus();
+      }),
+    );
+    dialog
+      ?.querySelector('[data-close]')
+      ?.addEventListener('click', () => dialog.close());
+    dialog
+      ?.querySelector('[data-next]')
+      ?.addEventListener('click', () => move(1));
+    dialog
+      ?.querySelector('[data-previous]')
+      ?.addEventListener('click', () => move(-1));
+    dialog?.addEventListener('keydown', (event) => {
+      if (event.key === 'Tab') {
+        const buttons = [
+          ...dialog.querySelectorAll<HTMLButtonElement>('button'),
+        ];
+        const index = buttons.findIndex(
+          (button) => button === document.activeElement,
+        );
+        const next =
+          (index + (event.shiftKey ? -1 : 1) + buttons.length) % buttons.length;
+        event.preventDefault();
+        buttons[next]?.focus();
+      }
+      if (event.key === 'ArrowRight') {
+        event.preventDefault();
+        move(1);
+      }
+      if (event.key === 'ArrowLeft') {
+        event.preventDefault();
+        move(-1);
+      }
+    });
+    dialog?.addEventListener('close', () => opener?.focus());
+  </script>
+</Layout>

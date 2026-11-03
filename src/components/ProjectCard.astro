@@ -1,0 +1,34 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import Photo from './Photo.astro';
+import Arrow from './Arrow.astro';
+import { url } from '../lib/paths';
+interface Props {
+  project: CollectionEntry<'projects'>;
+}
+const { project } = Astro.props;
+---
+
+<article class="project-card" data-category={project.data.category}>
+  <a
+    href={url(`projects/${project.id}/`)}
+    class="project-image"
+    aria-label={`Explore ${project.data.title}`}
+  >
+    <Photo name={project.data.cover} alt={project.data.alt} />
+    <span class="image-corner" aria-hidden="true">
+      <Arrow />
+    </span>
+  </a>
+  <div class="project-card-info">
+    <div>
+      <p class="eyebrow">
+        {project.data.category} / {project.data.location}
+      </p>
+      <h2>
+        <a href={url(`projects/${project.id}/`)}>{project.data.title}</a>
+      </h2>
+    </div>
+    <span class="project-year">{project.data.year}</span>
+  </div>
+</article>

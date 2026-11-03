@@ -1,0 +1,20 @@
+{
+  "title": "The Courtyard House",
+  "tagline": "Quiet lines. Open light.",
+  "category": "Residential",
+  "location": "Lecce, Italy",
+  "year": 2026,
+  "area": "280 m²",
+  "cover": "courtyard",
+  "alt": "Warm stone living room with a curved stair, linen sofa and olive tree courtyard behind full-height glazing",
+  "overview": "A home imagined around a single olive tree. The courtyard becomes an outdoor room, drawing slow-moving light into the heart of the plan and giving everyday life a quiet centre.",
+  "approach": "A continuous pale stone floor connects inside and outside. The sculptural stair softens the edge of the living room, while walnut joinery and woven textiles bring warmth to the mineral palette. This design study explores privacy without enclosure.",
+  "materials": ["Local limestone", "Oiled walnut", "Linen", "Lime plaster"],
+  "gallery": [
+    { "label": "Living with the courtyard", "position": "50% 50%" },
+    { "label": "Material detail — limestone and linen", "position": "55% 85%" },
+    { "label": "The curved stair and walnut wall", "position": "10% 30%" }
+  ],
+  "related": ["clay-atelier", "tidal-pavilion"],
+  "order": 1
+}

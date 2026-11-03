@@ -1,0 +1,20 @@
+{
+  "title": "Tidal Pavilion",
+  "tagline": "A frame for the horizon.",
+  "category": "Cultural",
+  "location": "Comporta, Portugal",
+  "year": 2026,
+  "area": "85 m²",
+  "cover": "tidal-pavilion",
+  "alt": "Quiet coastal reading pavilion with pale concrete walls, an oak bench and a large opening framing the Atlantic",
+  "overview": "A small reading pavilion imagined at the edge of a dune landscape. Its purpose is simple: offer shelter, a place to sit and an uninterrupted relationship with the sea. The architecture makes room for the horizon.",
+  "approach": "A deep opening turns the changing light into the main event. Board-formed concrete gives the outside a quiet weight; cork and oak soften the reading alcove within. The compact footprint is a study in doing less while giving more attention to place.",
+  "materials": ["Board-formed concrete", "Cork", "Oak", "Dune grasses"],
+  "gallery": [
+    { "label": "Reading toward the horizon", "position": "50% 50%" },
+    { "label": "Bench and sheltered alcove", "position": "35% 70%" },
+    { "label": "Concrete frame and coastal light", "position": "70% 30%" }
+  ],
+  "related": ["courtyard-house", "clay-atelier"],
+  "order": 4
+}

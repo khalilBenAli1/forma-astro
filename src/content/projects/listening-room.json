@@ -1,0 +1,20 @@
+{
+  "title": "The Listening Room",
+  "tagline": "A slower kind of gathering.",
+  "category": "Hospitality",
+  "location": "Milan, Italy",
+  "year": 2026,
+  "area": "145 m²",
+  "cover": "listening-room",
+  "alt": "Imagined Milan listening café with an oxblood counter, walnut record shelves and a tall industrial window",
+  "overview": "A former workshop reimagined as a small neighbourhood listening café. The concept brings music, coffee and conversation together through a sequence of intimate spaces rather than one open hall.",
+  "approach": "An oxblood counter anchors the room. Walnut shelving holds records and absorbs the visual rhythm of the old workshop, while brushed steel adds a lighter note. The retained tall window lends the everyday ritual of gathering a sense of occasion.",
+  "materials": ["Oxblood lacquer", "Walnut", "Brushed steel", "Terrazzo"],
+  "gallery": [
+    { "label": "A room for listening", "position": "50% 50%" },
+    { "label": "Counter and material study", "position": "25% 65%" },
+    { "label": "Daylight and record shelving", "position": "75% 30%" }
+  ],
+  "related": ["courtyard-house", "clay-atelier"],
+  "order": 2
+}

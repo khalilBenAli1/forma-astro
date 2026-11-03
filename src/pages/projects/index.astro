@@ -1,0 +1,96 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { categories } from '../../lib/schema';
+const projects = (await getCollection('projects')).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+---
+
+<Layout
+  title="Selected projects"
+  description="Four original fictional design studies, exploring residential, hospitality, workplace and cultural spaces."
+>
+  <section class="page-intro wrap">
+    <p class="eyebrow">A collection of possibilities / 2026</p>
+    <h1>Selected spaces.</h1>
+    <p>Different places. A shared way of seeing.</p>
+  </section>
+  <section class="wrap project-collection" aria-label="Project collection">
+    <div class="filter-bar">
+      <div class="filters" aria-label="Filter projects">
+        {['All', ...categories].map((category) => (
+          <a
+            href={`?category=${category.toLowerCase()}`}
+            data-filter={category.toLowerCase()}
+            aria-current={category === 'All' ? 'true' : undefined}
+          >
+            {category}
+          </a>
+        ))}
+      </div>
+      <p id="filter-status" role="status">
+        4 projects
+      </p>
+    </div>
+    <div class="projects-grid" id="project-grid">
+      {projects.map((project) => (
+        <ProjectCard project={project} />
+      ))}
+    </div>
+    <div id="empty-projects" hidden>
+      <h2>No spaces in this collection.</h2>
+      <p>Try another category or return to all projects.</p>
+      <a href="?category=all" data-reset>
+        View all projects ↗
+      </a>
+    </div>
+    <noscript>
+      <p class="demo-note">
+        All design studies are shown. Category filtering is available with
+        JavaScript enabled.
+      </p>
+    </noscript>
+    <p class="demo-note">
+      These are original fictional design studies, not built client commissions.
+    </p>
+  </section>
+  <script>
+    const filters =
+      document.querySelectorAll<HTMLAnchorElement>('[data-filter]');
+    const cards = document.querySelectorAll<HTMLElement>('[data-category]');
+    const applyFilter = () => {
+      const category =
+        new URLSearchParams(window.location.search).get('category') ?? 'all';
+      let count = 0;
+      cards.forEach((card) => {
+        card.hidden =
+          category !== 'all' &&
+          card.dataset.category?.toLowerCase() !== category;
+        if (!card.hidden) count++;
+      });
+      filters.forEach((filter) => {
+        if (filter.dataset.filter === category)
+          filter.setAttribute('aria-current', 'true');
+        else filter.removeAttribute('aria-current');
+      });
+      const status = document.querySelector('#filter-status');
+      if (status)
+        status.textContent = `${count} project${count === 1 ? '' : 's'}`;
+      const empty = document.querySelector<HTMLElement>('#empty-projects');
+      if (empty) empty.hidden = count > 0;
+    };
+    document
+      .querySelectorAll<HTMLAnchorElement>('[data-filter], [data-reset]')
+      .forEach((link) =>
+        link.addEventListener('click', (event) => {
+          event.preventDefault();
+          history.pushState({}, '', link.href);
+          applyFilter();
+        }),
+      );
+    window.addEventListener('popstate', applyFilter);
+    applyFilter();
+  </script>
+</Layout>

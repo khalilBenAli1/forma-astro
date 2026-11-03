@@ -1,0 +1,185 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Arrow from '../components/Arrow.astro';
+---
+
+<Layout
+  title="Start a conversation"
+  description="Try the local demonstration enquiry form for the fictional FORMA interiors studio. Nothing is sent or stored."
+>
+  <section class="contact-layout wrap">
+    <div class="contact-intro">
+      <p class="eyebrow">Every space starts somewhere.</p>
+      <h1>
+        Let’s make
+        <br />
+        room.
+      </h1>
+      <p>
+        A new home. A place to gather.
+        <br />
+        An idea that’s still taking shape.
+      </p>
+      <p>Tell us what you have in mind.</p>
+      <div class="contact-note">
+        <span class="note-dot"></span>
+        <p>
+          This is a demonstration form.
+          <br />
+          Nothing is sent or stored. Use sample details.
+        </p>
+      </div>
+    </div>
+    <div class="contact-form-area">
+      <form id="contact-form" novalidate>
+        <div id="form-errors" role="alert"></div>
+        <div class="field">
+          <label for="name">
+            Your name <span>(required)</span>
+          </label>
+          <input
+            id="name"
+            name="name"
+            autocomplete="name"
+            required
+            minlength="2"
+            maxlength="100"
+            placeholder="Alex Morgan"
+            aria-describedby="name-error"
+          />
+          <p class="field-error" id="name-error"></p>
+        </div>
+        <div class="field">
+          <label for="email">
+            Email address <span>(required)</span>
+          </label>
+          <input
+            id="email"
+            name="email"
+            type="email"
+            autocomplete="email"
+            required
+            maxlength="254"
+            placeholder="alex@example.com"
+            aria-describedby="email-error"
+          />
+          <p class="field-error" id="email-error"></p>
+        </div>
+        <div class="field">
+          <label for="interest">
+            What kind of space? <span>(required)</span>
+          </label>
+          <select
+            id="interest"
+            name="interest"
+            required
+            aria-describedby="interest-error"
+          >
+            <option value="">Choose a project type</option>
+            {[
+              'Residential',
+              'Hospitality',
+              'Workplace',
+              'Cultural',
+              'Something else',
+            ].map((type) => (
+              <option>{type}</option>
+            ))}
+          </select>
+          <p class="field-error" id="interest-error"></p>
+        </div>
+        <div class="field">
+          <label for="message">
+            A little about your idea <span>(required)</span>
+          </label>
+          <textarea
+            id="message"
+            name="message"
+            rows="4"
+            required
+            minlength="20"
+            maxlength="2000"
+            placeholder="The place, the feeling, the possibilities…"
+            aria-describedby="message-error"
+          ></textarea>
+          <p class="field-error" id="message-error"></p>
+        </div>
+        <button class="submit-button" type="submit" disabled>
+          Preview enquiry <Arrow />
+        </button>
+        <noscript>
+          <p class="demo-note">
+            This local form preview requires JavaScript. No message service is
+            connected.
+          </p>
+        </noscript>
+      </form>
+      <section id="contact-success" hidden tabindex="-1">
+        <p class="eyebrow">A good beginning.</p>
+        <h2>
+          Your idea has room
+          <br />
+          to grow.
+        </h2>
+        <p id="success-message"></p>
+        <p>
+          This was a local preview. Nothing was sent or stored, and no one will
+          contact you.
+        </p>
+        <button type="button" class="inline-link" id="start-again">
+          Try another enquiry <Arrow />
+        </button>
+      </section>
+    </div>
+  </section>
+  <script>
+    import { validateContact, type ContactValues } from '../lib/contact';
+    const form = document.querySelector<HTMLFormElement>('#contact-form');
+    const success = document.querySelector<HTMLElement>('#contact-success');
+    const submit = form?.querySelector<HTMLButtonElement>('[type=submit]');
+    if (submit) submit.disabled = false;
+    form?.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const data = new FormData(form);
+      const values: ContactValues = {
+        name: String(data.get('name') ?? ''),
+        email: String(data.get('email') ?? ''),
+        interest: String(data.get('interest') ?? ''),
+        message: String(data.get('message') ?? ''),
+      };
+      const errors = validateContact(values);
+      (Object.keys(values) as (keyof ContactValues)[]).forEach((key) => {
+        const field = form.elements.namedItem(key);
+        const error = document.querySelector(`#${key}-error`);
+        if (error) error.textContent = errors[key] ?? '';
+        if (field instanceof HTMLElement) {
+          if (errors[key]) field.setAttribute('aria-invalid', 'true');
+          else field.removeAttribute('aria-invalid');
+        }
+      });
+      const summary = document.querySelector('#form-errors');
+      if (Object.keys(errors).length) {
+        if (summary)
+          summary.textContent = 'Please check the highlighted fields.';
+        form.querySelector<HTMLElement>('[aria-invalid="true"]')?.focus();
+        return;
+      }
+      if (summary) summary.textContent = '';
+      const message = document.querySelector('#success-message');
+      if (message)
+        message.textContent = `Thanks, ${values.name.trim()}. Your ${values.interest.toLowerCase()} enquiry is ready to imagine.`;
+      form.hidden = true;
+      if (success) {
+        success.hidden = false;
+        success.focus();
+      }
+      form.reset();
+    });
+    document.querySelector('#start-again')?.addEventListener('click', () => {
+      if (!form || !success) return;
+      form.hidden = false;
+      success.hidden = true;
+      form.querySelector('input')?.focus();
+    });
+  </script>
+</Layout>
