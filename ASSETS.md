@@ -2,15 +2,16 @@
 
 All four architecture images depict fictional design studies. They are not documentary photographs or evidence of completed commissions. No private client assets or real client names are used.
 
-| Delivered asset                       | Provenance                                                                               | Usage                          |
-| ------------------------------------- | ---------------------------------------------------------------------------------------- | ------------------------------ |
-| `public/images/courtyard-*.webp`      | User-approved generated `references/assets/interiors.png` from the portfolio prompt pack | The Courtyard House only       |
-| `public/images/listening-room-*.webp` | Original built-in ImageGen generation, November 2026                                     | The Listening Room only        |
-| `public/images/clay-atelier-*.webp`   | Original built-in ImageGen generation, November 2026                                     | Clay Atelier only              |
-| `public/images/tidal-pavilion-*.webp` | Original built-in ImageGen generation, November 2026                                     | Tidal Pavilion only            |
-| `public/social-preview.jpg`           | Courtyard artwork with an original code-generated FORMA wordmark and heading             | Link preview                   |
-| `public/favicon.svg`, arrow graphics  | Original SVG code                                                                        | Identity and controls          |
-| `docs/screenshots/*.png`              | Actual production app captures made with Playwright                                      | Verification and documentation |
+| Delivered asset                           | Provenance                                                                                 | Usage                          |
+| ----------------------------------------- | ------------------------------------------------------------------------------------------ | ------------------------------ |
+| `public/images/courtyard-*.webp`          | User-approved generated `references/assets/interiors.png` from the portfolio prompt pack   | The Courtyard House only       |
+| `public/images/listening-room-*.webp`     | Original built-in ImageGen generation, November 2026                                       | The Listening Room only        |
+| `public/images/clay-atelier-*.webp`       | Original built-in ImageGen generation, November 2026                                       | Clay Atelier only              |
+| `public/images/tidal-pavilion-*.webp`     | Original built-in ImageGen generation, November 2026                                       | Tidal Pavilion only            |
+| `public/social-preview.jpg`               | Courtyard artwork with an original code-generated FORMA wordmark and heading               | Link preview                   |
+| `public/favicon.svg`, arrow graphics      | Original SVG code                                                                          | Identity and controls          |
+| `docs/screenshots/forma-walkthrough.webm` | Actual Playwright recording of gallery and local enquiry interactions, with sample details | Verification and documentation |
+| `docs/screenshots/*.png`                  | Actual production app captures made with Playwright                                        | Verification and documentation |
 
 The built-in ImageGen tool was used; no API key, paid third-party workflow, or hotlinked image is required. Selected output files were copied into this repository as optimized WebP derivatives at 640, 1000 and 1600 pixels wide. Detail gallery frames are explicitly described as crops of one image, never additional views of a completed project. Shared studio and project-index imagery links to its originating study.
 

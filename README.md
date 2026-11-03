@@ -6,7 +6,7 @@ An original fictional architecture and interiors portfolio created in **November
 
 [Source](https://github.com/khalilBenAli1/forma-astro) · [Quality checks](https://github.com/khalilBenAli1/forma-astro/actions) · [Architecture](docs/ARCHITECTURE.md) · [Asset provenance](ASSETS.md)
 
-Publication is being verified. The free GitHub Pages target is `https://khalilbenali1.github.io/forma-astro/`.
+**[Open the live demo](https://khalilbenali1.github.io/forma-astro/)** — verified on GitHub Pages in Chromium and WebKit. [Delivery evidence](docs/DELIVERY.md).
 
 ## Explore
 
@@ -25,7 +25,7 @@ Publication is being verified. The free GitHub Pages target is `https://khalilbe
 Use Node **22.23.4** and npm **10.9.8**. Astro 7.4.5 requires this Node patch or newer. Dependencies and the package manager are pinned; no API keys or accounts are needed to try the application.
 
 ```sh
-nvm use
+nvm install
 npm install --global npm@10.9.8
 npm ci
 npm run dev
@@ -48,7 +48,7 @@ node scripts/measure-build.mjs
 
 The unit tests exercise the real content schema, related IDs, distinct cover imagery, invalid content rejection and enquiry validation boundaries. The **14 Playwright journeys** run in Chromium and WebKit, including filtering/back/reload, gallery keyboard/focus behavior, mobile navigation, contact validation/success/reset, static no-JavaScript navigation, approved layout geometry, and every route's accessibility/reflow at **320, 390, 768 and 1440px**. CI installs browser dependencies, repeats the frozen-lockfile checks and deploys main only after success.
 
-Actual screenshot evidence: [desktop home](docs/screenshots/home-desktop.png), [mobile home](docs/screenshots/home-mobile.png), [project index](docs/screenshots/projects-desktop.png), [case study](docs/screenshots/project-desktop.png), [contact](docs/screenshots/contact-desktop.png). The reference comparison scored 94/100; this is an internal visual review, not a performance or accessibility certification.
+Actual screenshot evidence: [short interaction walkthrough](docs/screenshots/forma-walkthrough.webm), [desktop home](docs/screenshots/home-desktop.png), [mobile home](docs/screenshots/home-mobile.png), [project index](docs/screenshots/projects-desktop.png), [case study](docs/screenshots/project-desktop.png), [contact](docs/screenshots/contact-desktop.png). The reference comparison scored 94/100; this is an internal visual review, not a performance or accessibility certification.
 
 ## Implementation
 
