@@ -16,7 +16,7 @@ export default defineConfig({
     ? {}
     : {
         webServer: {
-          command: 'npm run preview',
+          command: 'npm run preview -- --ignore-lock',
           url: 'http://127.0.0.1:4184/forma-astro/',
           reuseExistingServer: !process.env.CI,
         },
