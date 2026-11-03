@@ -16,7 +16,7 @@ The build generates nine HTML pages. No hydrated UI framework, client router or 
 | Homepage, studio or 404 script budget           |                161 |              147 |
 | Project route scripts, including shared handler |              1,463 |              730 |
 | Contact route scripts, including shared handler |              1,861 |              992 |
-| Shared CSS                                      |             18,232 |            4,390 |
+| Shared CSS                                      |             18,285 |            4,403 |
 
 Scripts are separate route-specific modules. The home page does not load the gallery, filters or enquiry behavior. The form validator is plain TypeScript and ships without Zod; Zod validates collection content at build time.
 

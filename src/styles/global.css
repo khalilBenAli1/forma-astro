@@ -1351,3 +1351,7 @@ p {
 .footer-cta {
   font-family: 'Archivo', Arial, sans-serif;
 }
+
+.lightbox button:focus-visible {
+  outline-color: #fafaf7;
+}

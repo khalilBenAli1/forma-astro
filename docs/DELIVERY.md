@@ -23,8 +23,11 @@ Additional public checks confirmed the custom unknown route returns HTTP 404 and
 - [Project collection](screenshots/projects-desktop.png)
 - [Project route](screenshots/project-desktop.png)
 - [Contact page](screenshots/contact-desktop.png)
+- [Keyboard focus in the dark gallery](screenshots/gallery-keyboard.png)
 - [Short actual interaction recording](screenshots/forma-walkthrough.webm), 1280×800 WebM, approximately 3.7 seconds and 902 KiB; Chromium verified playable with no media error.
 
 The reference review scored 94/100 after the requested font update. This is an internal visual assessment; it is not a Lighthouse score or accessibility certification. The final screenshot pair comes from the public deployment. [Payload measurements](PERFORMANCE.md), [architecture](ARCHITECTURE.md) and [asset/font provenance](../ASSETS.md) are documented separately.
 
 No external deployment blockers remain. Physical mobile hardware and screen-reader verification were not performed. Imagery is conceptual AI artwork, and the contact form intentionally previews locally without delivery or persistence.
+
+The final keyboard visual pass strengthened the gallery focus outline to warm white on charcoal. Both gallery keyboard/focus journeys passed again in Chromium and WebKit.
