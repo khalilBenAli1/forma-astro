@@ -37,3 +37,9 @@ The final keyboard visual pass strengthened the gallery focus outline to warm wh
 The overflow assertion now compares document scroll width with `document.documentElement.clientWidth`. The nine original routes pass at 320/390/768/1440 in both engines. A new maximum-length accepted contact-input journey exposed an unbroken 100-character name expanding the success result to 842px at a 320px viewport. One scoped `overflow-wrap: anywhere` rule fixes that edge case without changing the default composition. The corrected result measures 320px scroll width against 320px client width; reset remains usable.
 
 The current suite contains sixteen Chromium/WebKit journeys, including this long-input regression at 320/390/768. All sixteen passed locally with lint, formatting, strict analysis, six unit tests and production build. [Actual corrected narrow-screen state](screenshots/contact-long-name.png).
+
+## Email format maintenance
+
+Negative unit regressions first confirmed that `alex<smith>@example.com` and `alex,smith@example.com` advanced through the original format check. A small supported unquoted-local-part character guard now rejects those formats while retaining the existing outer trimming, raw 254-character limit, domain-shape check, international names, project-interest and message rules. Plus/dot and apostrophe addresses retain their existing behavior. This is a bounded format check, not DNS, deliverability or full-RFC validation.
+
+After this change, lint, formatting, strict Astro analysis without warnings or hints, production generation and all 9 unit tests passed locally. No interface, content, media or submission behavior was changed.

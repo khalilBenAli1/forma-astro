@@ -12,13 +12,15 @@ export interface ContactValues {
   message: string;
 }
 export type ContactErrors = Partial<Record<keyof ContactValues, string>>;
+const supportedLocalPart = /^[a-z0-9.!#$%&'*+/=?^_`{|}~-]+$/i;
 export function validateContact(values: ContactValues): ContactErrors {
   const errors: ContactErrors = {};
   if (values.name.trim().length < 2 || values.name.trim().length > 100)
     errors.name = 'Enter a name between 2 and 100 characters.';
   if (
     !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email.trim()) ||
-    values.email.length > 254
+    values.email.length > 254 ||
+    !supportedLocalPart.test(values.email.trim().split('@')[0] ?? '')
   )
     errors.email = 'Enter a valid email address.';
   if (!contactInterests.some((interest) => interest === values.interest))

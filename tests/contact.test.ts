@@ -7,6 +7,25 @@ const valid = {
   message: 'An imagined reading room with warm natural light.',
 };
 describe('local contact preview', () => {
+  it.each(['alex<smith>@example.com', 'alex,smith@example.com'])(
+    'rejects unsupported punctuation in an unquoted email local part: %s',
+    (email) => {
+      expect(validateContact({ ...valid, email })).toHaveProperty('email');
+    },
+  );
+  it('preserves trimmed plus/dot addresses, international names and the existing length boundary', () => {
+    for (const email of [
+      '  alex.smith+studio@example.com  ',
+      "o'brien+studio@example.co.uk",
+      'a'.repeat(242) + '@example.com',
+    ])
+      expect(
+        validateContact({ ...valid, name: '  Élodie 山田  ', email }),
+      ).toEqual({});
+    expect(
+      validateContact({ ...valid, email: 'a'.repeat(243) + '@example.com' }),
+    ).toHaveProperty('email');
+  });
   it('accepts a complete enquiry with outer whitespace', () =>
     expect(
       validateContact({
